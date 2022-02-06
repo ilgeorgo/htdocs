@@ -1,3 +1,54 @@
+Use of XAMPP is suggested. Replace the htdocs folder of XAMPP with this folder and set the virtual host as per below instructions in order to replicate it. 
+
+```
+<VirtualHost *:80>
+        ServerName frontend.yii
+        DocumentRoot "C:/xampp/htdocs/frontend/web"
+           
+        <Directory "C:/xampp/htdocs/frontend/web">
+            # use mod_rewrite for pretty URL support
+            RewriteEngine on
+            # If a directory or a file exists, use the request directly
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+            # Otherwise forward the request to index.php
+            RewriteRule . index.php
+
+            # use index.php as index file
+            DirectoryIndex index.php
+
+            # ...other settings...
+        </Directory>
+    </VirtualHost>
+       
+    <VirtualHost *:80>
+        ServerName backend.yii
+        DocumentRoot "C:/xampp/htdocs/backend/web/"
+           
+        <Directory "C:/xampp/htdocs/backend/web/">
+            # use mod_rewrite for pretty URL support
+            RewriteEngine on
+            # If a directory or a file exists, use the request directly
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+            # Otherwise forward the request to index.php
+            RewriteRule . index.php
+
+            # use index.php as index file
+            DirectoryIndex index.php
+
+            # ...other settings...
+        </Directory>
+    </VirtualHost>
+```
+<p>
+Then at C:\Windows\System32\drivers\etc update hosts file:
+<br>
+127.0.0.1	frontend.yii
+<br>
+127.0.0.1	backend.yii
+</p>
+
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
